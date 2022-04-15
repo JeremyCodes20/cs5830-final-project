@@ -16,7 +16,8 @@ class StatsSpider(scrapy.Spider):
     def __parse_stats(self, response):
         name = response.css("#info.players #meta div h1 span::text").get()
         player_id = response.url.split("/")[-1].rstrip(".html")
-        rows = response.css("#all_totals-playoffs_totals #switcher_totals-playoffs_totals #div_totals tbody tr")
+        # rows = response.css("#all_totals-playoffs_totals #switcher_totals-playoffs_totals #div_totals tbody tr")
+        rows = response.css("#totals tbody tr")
         if len(rows) == 0:
             self.log("Couldn't find table for {}".format(player_id))
             return
